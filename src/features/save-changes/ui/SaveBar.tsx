@@ -36,7 +36,7 @@ export function SaveBar({is_dirty, onSave, onReset}: Props) {
       )}
       <Button isDisabled={!is_dirty} onPress={onSave}>
         Сохранить
-        <Kbd className="hidden sm:inline-flex" variant="light">
+        <Kbd className="hidden text-accent-foreground/70 sm:inline-flex" variant="light">
           <Kbd.Abbr keyValue="command" />
           <Kbd.Content>S</Kbd.Content>
         </Kbd>

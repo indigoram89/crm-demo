@@ -178,7 +178,12 @@ export function DirectoryEditor({directory, icon}: Props) {
                             <InputGroup.Input className={item.is_hidden ? "text-muted" : undefined} />
                             {(is_default || item.is_hidden) && (
                               <InputGroup.Suffix className="hidden sm:flex">
-                                <Chip color={is_default ? "success" : "default"} size="sm" variant="soft">
+                                <Chip
+                                  className="whitespace-nowrap"
+                                  color={is_default ? "success" : "default"}
+                                  size="sm"
+                                  variant="soft"
+                                >
                                   {is_default ? "По умолчанию" : "Скрыто"}
                                 </Chip>
                               </InputGroup.Suffix>
@@ -239,7 +244,8 @@ export function DirectoryEditor({directory, icon}: Props) {
         </Card>
       </div>
 
-      <DirectoryPreview directory={draft} />
+      {/* При смене значения по умолчанию предпросмотр начинает «с новой записи». */}
+      <DirectoryPreview key={draft.default_id ?? "none"} directory={draft} />
     </div>
   );
 }
