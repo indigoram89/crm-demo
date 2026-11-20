@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+@import "@heroui-pro/react/css";
+
+/*
+ * Готовые темы HeroUI Pro (glass, mouve, brutalism) подключаются по одной во время работы:
+ * их компонентные стили не привязаны к data-theme. См. shared/lib/theme.ts.
+ */
+
+/*
+ * Стеклу нужно что-то за ним: документация Glass советует фон-картинку или градиент.
+ * Штатный --background-gradient очень бледный, поэтому для демо добавляем цветные пятна.
+ */
+@layer base {
+  body {
+    background-image: var(--background-gradient, none);
+    background-attachment: fixed;
+  }
+
+  html[data-theme="glass-light"] body {
+    background-image:
+      radial-gradient(at 12% 8%, oklch(78% 0.14 265 / 0.75), transparent 42%),
+      radial-gradient(at 88% 12%, oklch(84% 0.12 200 / 0.7), transparent 40%),
+      radial-gradient(at 75% 92%, oklch(82% 0.13 330 / 0.6), transparent 45%),
+      radial-gradient(at 20% 85%, oklch(88% 0.1 150 / 0.55), transparent 40%), var(--background-gradient);
+  }
+
+  html[data-theme="glass-dark"] body {
+    background-image:
+      radial-gradient(at 12% 8%, oklch(45% 0.16 265 / 0.8), transparent 42%),
+      radial-gradient(at 88% 12%, oklch(45% 0.12 200 / 0.7), transparent 40%),
+      radial-gradient(at 75% 92%, oklch(42% 0.15 330 / 0.65), transparent 45%),
+      radial-gradient(at 20% 85%, oklch(40% 0.1 150 / 0.55), transparent 40%), var(--background-gradient);
+  }
+}
+
+/* Шапка в Glass: полупрозрачная с размытием, тем же --glass-blur, что и остальные стеклянные поверхности темы. */
+@layer components {
+  html[data-theme^="glass"] .navbar {
+    background-color: color-mix(in oklch, var(--background) 45%, transparent);
+    backdrop-filter: blur(var(--glass-blur, 20px));
+  }
+}
